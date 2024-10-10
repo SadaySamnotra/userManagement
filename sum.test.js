@@ -4,7 +4,8 @@ const {getPost} = require('./testingCodes/api');
 const logActivity = require('./testingCodes/logger');
 const performAction = require('./testingCodes/app');
 const fetchUserData = require('./testingCodes/user');
-const fetchUserDataCallback = require('./testingCodes/userCallback');
+const {fetchUserDataCallback} = require('./testingCodes/userCallback');
+
 
 
 test('fetches user data successfully',async()=>{
@@ -48,6 +49,7 @@ test('logs activity when performing an action',()=>{
     expect(logActivity).toHaveBeenCalledWith('User performed: test action');
 });
 
+//testing async by making a new promise.
 test('Testing an asyncronous function by making a new promise',()=>{
     return fetchUserData(1).then((data)=>{
         expect(data).toEqual({id:1,name:"saday"});
@@ -60,6 +62,7 @@ test('Testing the asynchronous function by making a bad request',()=>{
     });
 });
 
+//testing asycn functions using async and await pair
 test('Testing the same asynchronous above, but now with async await(correct functioning test)',async()=>{
     const data=await fetchUserData(1);
     expect(data).toEqual({id:1,name:"saday"});
@@ -67,29 +70,26 @@ test('Testing the same asynchronous above, but now with async await(correct func
 
 test('Testing the same asynchronous above, but now with async and await(passing wrong parameters)',async()=>{
     try{
-        await fetchUserDataCallback(2);
+        await fetchUserData(2);
     }catch(error){
         expect(error).toBe('User not found');
     };
 });
 
-test('Test for callback using done()',(done)=>{
-    fetchUserDataCallback(1,(error,data)=>{
-        try{
-            expect(error).toBeNull();
-            expect(data).toEqual({id:1,name:"saday"});
-            done();
-        }catch(error){
-            done(error);
-        }
-        
-    });
-});
+//testing asycn using done().
 
 test('Test for callback using done() in the case the function fails',(done)=>{
     fetchUserDataCallback(2,(error,data)=>{
         expect(error).toBe('User not found');
         expect(data).toBeUndefined();
+        done();
+    });
+});
+
+test('Test for callback using done()',(done)=>{
+    fetchUserDataCallback(1,(error,data)=>{
+        expect(data).toEqual({id:1,name:"saday"});
+        expect(error).toBeNull();
         done();
     });
 });

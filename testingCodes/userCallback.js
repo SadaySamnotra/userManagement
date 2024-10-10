@@ -1,11 +1,7 @@
-const fetchUserData = (id,callback)=>{
+const fetchUserDataCallback=(id, func)=>{
     setTimeout(()=>{
-        if(id===1){
-            callback(null,{id:1,name:"saday"});
-        }else{
-            callback('User not found');
-        }
+        id===1 ? func(null,{id:1,name:"saday"}) : func('User not found');
     },1000);
 };
 
-module.exports = fetchUserData;
+module.exports = {fetchUserDataCallback,};

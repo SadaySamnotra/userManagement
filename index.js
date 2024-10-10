@@ -5,8 +5,6 @@ const studentRouter = require('./router/studentRouter');
 const subjectRouter= require('./router/subjectRouter');
 const teacherRouter = require('./router/teacherRouter');
 
-
-
 require('dotenv').config();
 
 const PORT = 5500;
@@ -20,12 +18,14 @@ app.use('/student',studentRouter);
 app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);
 
-sequelize.sync({force:true})
+sequelize.sync({force:false})
         .then(()=>{
-            app.listen(PORT,()=>{
+            return app.listen(PORT,()=>{
                 console.log(`Server is running on port: ${PORT}` );
             })
         })
         .catch((error)=>{
             console.log('Unable to connect with the database',error);
         });
+
+module.exports=app;

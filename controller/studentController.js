@@ -26,10 +26,10 @@ const getStudentByID=async(req,res)=>{
     const {sID}=req.params;
     try{
         const student = await Student.findByPk(sID);
-        res.status(200).json({student});
+        return res.status(200).json({student});
     }catch(err){
         console.log(err);
-        res.status(500).json({error:"Failed to fetch students"});
+        return res.status(500).json({error:"Failed to fetch students"});
     }
 };
 
@@ -55,7 +55,7 @@ const deleteStudent=async(req,res)=>{
     try{
         const result = await Student.destroy({where:{id}});
         if(result){
-            res.status(204).json({message:"The user has been deleted"});
+            res.status(204).send();
         }else{
             res.status(404).json({error:"Some error in the code or no record found"});
         }
