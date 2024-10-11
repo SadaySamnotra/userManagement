@@ -18,6 +18,7 @@ app.use('/student',studentRouter);
 app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);
 
+//running the application....
 sequelize.sync({force:false})
         .then(()=>{
             return app.listen(PORT,()=>{
