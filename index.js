@@ -19,7 +19,7 @@ app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);
 
 //running the application....
-sequelize.sync({force:false})
+sequelize.sync({force:true})
         .then(()=>{
             return app.listen(PORT,()=>{
                 console.log(`Server is running on port: ${PORT}` );

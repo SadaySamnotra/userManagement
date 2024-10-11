@@ -24,6 +24,10 @@ const Student=sequelize.define('Student',{
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    password:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    }
 });
 
 Student.associate=(models)=>{
