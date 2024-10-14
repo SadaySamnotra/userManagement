@@ -7,7 +7,7 @@ html
     .container
       h1 Register to School Management System
 
-      form(action="/student" method="POST")
+      form(action="/auth/register" method="POST")
         .form-group
           label(for="firstName") First Name
           input(type="text" name="firstName" id="firstName" placeholder="Enter your first name" required)
@@ -27,6 +27,11 @@ html
         .form-group
           label(for="password") Password
           input(type="password" name="password" id="password" placeholder="Enter your password" required)
+        .form-group
+          label(for="userType") Select user type: 
+          select(name = "userType" id = "userType" required)
+           option(value = "student") Student 
+           option(value = "teacher") Teacher
 
         .form-group
           button(type="submit" class="btn btn-primary") Register

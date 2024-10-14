@@ -28,6 +28,10 @@ const Student = sequelize.define('Student', {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    userType:{
+        type:DataTypes.ENUM("student"),
+        allowNull:false,
     }
 }, {
     hooks: {
@@ -39,14 +43,6 @@ const Student = sequelize.define('Student', {
     },
 });
 
-module.exports = Student;
 
-
-
-
-Student.associate=(models)=>{
-    Student.belongsToMany(models.Teacher,{through:'StudentTeachers'});
-    Student.belongsToMany(models.Subjects,{throught:'StudentSubjects'});
-};
 
 module.exports=Student;

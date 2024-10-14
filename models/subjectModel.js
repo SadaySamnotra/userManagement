@@ -13,9 +13,6 @@ const Subjects=sequelize.define('Subject',
     }
 });
 
-Subjects.associate=(models)=>{
-    Subjects.belongsToMany(models.Student,{through:'StudentSubjects'});
-    Subjects.belongsToMany(models.Teacher,{through:'TeacherSubjects'});
-};
+
 
 module.exports=Subjects;

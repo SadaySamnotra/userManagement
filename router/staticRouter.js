@@ -5,7 +5,7 @@ router.get('/',(req,res)=>{
     res.render('homepage');
 })
 
-router.get('/login',(reqr,res)=>{
+router.get('/login',(req,res)=>{
     res.render('login');
 })
 

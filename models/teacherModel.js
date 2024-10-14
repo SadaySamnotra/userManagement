@@ -1,8 +1,8 @@
 const sequelize=require('../database');
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
-const Teacher=sequelize.define('Teacher',
-    {
+const Teacher=sequelize.define('Teacher',{
     teacherID:{
         type:DataTypes.INTEGER,
         autoIncrement:true,
@@ -16,19 +16,28 @@ const Teacher=sequelize.define('Teacher',
         type:DataTypes.STRING,
         allowNull:false
     },
-    address:{
+    email:{
         type:DataTypes.STRING,
         allowNull:false
     },
     password:{
         type:DataTypes.STRING,
         allowNull:false,
-    }
+    },
+    userType:{
+        type:DataTypes.ENUM("teacher"),
+        allowNull:false,
+    },
+},{
+    hooks:{
+        beforeCreate:async(teacher,options)=>{
+            teacher.firstName=teacher.firstName.toLowerCase();
+            teacher.lastName=teacher.lastName.toLowerCase();
+            teacher.password= await bcrypt.hash(teacher.password,10);
+        },
+    },
 });
 
-Teacher.associate=(models)=>{
-    Teacher.belongsToMany(models.Student,{through:'StudentTeachers'});
-    Teacher.belongsToMany(models.Subjects,{through:'TeacherSubjects'});
-};
+
 
 module.exports=Teacher;

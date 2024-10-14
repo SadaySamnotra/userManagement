@@ -1,14 +1,13 @@
 const Student = require('../models/studentModel');
 
 
-const createStudent=async(req,res)=>{
-    const {firstName,lastName,email,age,password}=req.body;
+const createStudent=async(req)=>{
+    const {firstName,lastName,email,age,password,userType}=req.body;
     try{
-        const student = await Student.create({firstName,lastName,email,age,password});
-        res.status(201).json({student});
+        const student = await Student.create({firstName,lastName,email,age,password,userType});
+        return student;
     }catch(err){
         console.error(err);
-        res.status(500).json({error:'Failed to make the student entry in the database'});
     }
 };
 
@@ -65,10 +64,23 @@ const deleteStudent=async(req,res)=>{
     };
 };
 
+const getStudentByEmail=async(req)=>{
+    const {email}=req.body;
+    try{
+        const result = await Student.findOne({where:{email}});
+        if(result){
+            return result;
+        }
+    }catch(err){
+        console.log(err);
+    }
+}
+
 module.exports={
     createStudent,
     getAllStudents,
     getStudentByID,
     updateStudent,
     deleteStudent,
+    getStudentByEmail,
 };

@@ -1,12 +1,12 @@
 const Teacher = require('../models/teacherModel');
-const createTeacher=async(req,res)=>{
-    const {firstName,lastName,address}=req.body;
+
+const createTeacher=async(req)=>{
+    const {firstName,lastName,email,password,userType}=req.body;
     try{
-        const result = await Teacher.create({firstName,lastName,address});
-        res.status(201).json({result});
+        const teacher = await Teacher.create({firstName,lastName,email,password,userType});
+        return teacher;
     }catch(err){
         console.error(err);
-        res.status(500).json({error:"Internal server error"});
     };
 };
 
@@ -74,10 +74,25 @@ const deleteTeacher=async(req,res)=>{
     };
 };
 
+const getTeacherByEmail= async(req)=>{
+    const {email}=req.body;
+    try{
+        const result = await Teacher.findOne({where:{email}});
+        if(result){
+            return result;
+        }else{
+            return {};
+        }
+    }catch(error){
+        console.error(error);
+    }
+}
+
 module.exports={
     createTeacher,
     updateTeacher,
     getAllTeachers,
     getTeacherByID,
     deleteTeacher,
+    getTeacherByEmail,
 };

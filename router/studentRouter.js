@@ -1,12 +1,11 @@
 const express=require('express');
 const router = express.Router();
-
 const student_controller=require('../controller/studentController');
+const authController = require('../controller/authController');
+// const authJWT = require('../middleware/authJWT');
 
-router.get('/',student_controller.getAllStudents);
-router.post('/',student_controller.createStudent);
-router.get('/:id',student_controller.getStudentByID);
-router.put('/:id',student_controller.updateStudent);
-router.delete('/:id',student_controller.deleteStudent);
+router.post('/',authController.login);
+router.post('/',authController.register);
+
 
 module.exports=router;

@@ -5,7 +5,7 @@ const studentRouter = require('./router/studentRouter');
 const subjectRouter= require('./router/subjectRouter');
 const teacherRouter = require('./router/teacherRouter');
 const staticRouter= require('./router/staticRouter');
-
+const authRouter = require('./router/authRouter');
 require('dotenv').config();
 
 const PORT = 5500;
@@ -20,6 +20,7 @@ app.set('views','./views');
 app.set('view engine','pug');
 
 app.use('/',staticRouter);
+app.use('/auth',authRouter);
 app.use('/student',studentRouter);
 app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);
