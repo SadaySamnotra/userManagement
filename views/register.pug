@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Register - School Management System
+    link(rel='stylesheet', href='/stylesheets/stylesheet.css')
+  body
+    .container
+      h1 Register to School Management System
+
+      form(action="/student" method="POST")
+        .form-group
+          label(for="firstName") First Name
+          input(type="text" name="firstName" id="firstName" placeholder="Enter your first name" required)
+
+        .form-group
+          label(for="lastName") Last Name
+          input(type="text" name="lastName" id="lastName" placeholder="Enter your last name" required)
+
+        .form-group
+          label(for="email") Email
+          input(type="email" name="email" id="email" placeholder="Enter your email" required)
+
+        .form-group
+          label(for="age") Age
+          input(type="number" name="age" id="age" placeholder="Enter your age" required)
+
+        .form-group
+          label(for="password") Password
+          input(type="password" name="password" id="password" placeholder="Enter your password" required)
+
+        .form-group
+          button(type="submit" class="btn btn-primary") Register
+
+    footer
+      p &copy; 2024 School Management System

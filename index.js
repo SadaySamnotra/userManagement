@@ -4,6 +4,7 @@ const express = require('express');
 const studentRouter = require('./router/studentRouter');
 const subjectRouter= require('./router/subjectRouter');
 const teacherRouter = require('./router/teacherRouter');
+const staticRouter= require('./router/staticRouter');
 
 require('dotenv').config();
 
@@ -14,6 +15,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
+app.use(express.static('public'));
+app.set('views','./views');
+app.set('view engine','pug');
+
+app.use('/',staticRouter);
 app.use('/student',studentRouter);
 app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);

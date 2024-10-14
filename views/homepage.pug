@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title School Management System
+    link(rel='stylesheet', href='/stylesheets/stylesheet.css')
+  body
+    nav.navbar
+      ul.navbar-list
+        li.nav-item
+          a(href="/") Home
+        li.nav-item
+          a(href="/students") Students
+        li.nav-item
+          a(href="/teachers") Teachers
+        li.nav-item
+          a(href="/subjects") Subjects
+        li.nav-item
+          if user
+            a(href="/logout") Logout
+          else
+            a(href="/login") Login/Register
+
+    
+    .container
+      h1 Welcome to the School Management System
+      p Manage and access details of students, teachers, and subjects all in one place.
+    
+
+    .auth-container
+      if !user
+        h2 Please Login or Register
+        p If you are new, register below. Otherwise, login to your account.
+        
+        .auth-buttons
+          a.button(href="/register") Register
+          a.button(href="/login") Login
+      else
+        h2 Welcome back #{user.firstName}
+        p Use the navigation bar to access different sections of the system.
+
+    
+    footer
+      p &copy; 2024 School Management System

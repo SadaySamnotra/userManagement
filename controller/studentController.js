@@ -2,9 +2,9 @@ const Student = require('../models/studentModel');
 
 
 const createStudent=async(req,res)=>{
-    const {firstName,lastName,email,age}=req.body;
+    const {firstName,lastName,email,age,password}=req.body;
     try{
-        const student = await Student.create({firstName,lastName,email,age});
+        const student = await Student.create({firstName,lastName,email,age,password});
         res.status(201).json({student});
     }catch(err){
         console.error(err);

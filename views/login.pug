@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title Login - School Management System
+    link(rel='stylesheet', href='/stylesheets/stylesheet.css')
+  body
+    .container
+      h1 Login to School Management System
+      
+      form(action="/login" method="POST")
+        .form-group
+          label(for="email") Email
+          input(type="email" name="email" id="email" placeholder="Enter your email" required)
+
+        .form-group
+          label(for="password") Password
+          input(type="password" name="password" id="password" placeholder="Enter your password" required)
+
+        .form-group
+          button(type="submit" class="btn btn-primary") Login
+
+      .form-footer
+        p Don't have an account? 
+          a(href="/register") Register here
+
+    footer
+      p &copy; 2024 School Management System
