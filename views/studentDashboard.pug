@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Student Dashboard
+    link(rel='stylesheet', href='/stylesheets/stylesheet.css')  
+  body
+    nav
+      ul
+        li Welcome #{firstName} #{lastName}  
+        li
+          a(href="/student/details") Personal Details
+        li
+          a(href="/student/timetable") View Timetable
+        li
+          a(href="/student/request-class") Apply for More Classes
+        li
+          a(href="/auth/logout") Logout
+      
+    h1 Student Dashboard
+    section#subject-management
+      h2 Available Subjects
+      if subjects && subjects.length
+        ul
+          each subject in subjects
+            li
+              | #{subject.subjectName} - Teacher: #{subject.teacherName}  
+      else
+        p No subjects available.
+
+    footer
+      p Thanks for visiting!

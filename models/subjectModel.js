@@ -5,14 +5,13 @@ const Subjects=sequelize.define('Subject',
     {
     subjectID:{
         type:DataTypes.INTEGER,
-        primaryKey:true
+        autoIncrement:true,
+        primaryKey:true,
     },
     subjectName:{
         type:DataTypes.STRING,
         allowNull:false
-    }
+    },
 });
-
-
 
 module.exports=Subjects;

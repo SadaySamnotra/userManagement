@@ -66,6 +66,17 @@ const deleteSubject=async(req,res)=>{
     };
 };
 
+Subject.associate = (models) => {
+    Subject.belongsToMany(models.Student, {
+        through: 'StudentSubjects',
+        foreignKey: 'subjectId',
+        otherKey: 'studentId',
+    });
+    Subject.belongsTo(models.Teacher, {
+        foreignKey: 'teacherId',
+    });
+};
+
 module.exports={
     addSubject,
     getAllSubjects,

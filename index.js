@@ -6,6 +6,7 @@ const subjectRouter= require('./router/subjectRouter');
 const teacherRouter = require('./router/teacherRouter');
 const staticRouter= require('./router/staticRouter');
 const authRouter = require('./router/authRouter');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const PORT = 5500;
@@ -14,6 +15,7 @@ const app = express();
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 
 app.use(express.static('public'));
 app.set('views','./views');
@@ -26,7 +28,7 @@ app.use('/subject',subjectRouter);
 app.use('/teacher',teacherRouter);
 
 //running the application....
-sequelize.sync({force:true})
+sequelize.sync({force:false})
         .then(()=>{
             return app.listen(PORT,()=>{
                 console.log(`Server is running on port: ${PORT}` );

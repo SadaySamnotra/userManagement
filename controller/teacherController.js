@@ -1,4 +1,6 @@
 const Teacher = require('../models/teacherModel');
+const Subjects = require('../models/subjectModel');
+const teacherService = require('../service/teacherService')
 
 const createTeacher=async(req)=>{
     const {firstName,lastName,email,password,userType}=req.body;
@@ -10,19 +12,6 @@ const createTeacher=async(req)=>{
     };
 };
 
-const getAllTeachers=async(req,res)=>{
-    try{
-        const result = await Teacher.findAll();
-        if(result){
-            res.status(200).json({result});
-        }else{
-            res.status(404).json({error:"No records found"});
-        }
-    }catch(err){
-        console.error(err);
-        res.status(500).json({error:"Internal server error"});
-    }
-};
 
 const updateTeacher=async(req,res)=>{
     const {firstName,lastName,address}=req.body;
@@ -43,21 +32,6 @@ const updateTeacher=async(req,res)=>{
     };
 };
 
-const getTeacherByID=async(req,res)=>{
-    const {id}=req.params;
-    try{
-        const result = await Teacher.findByPk(id);
-        if(result){
-            console.log(result);
-            res.status(200).json({result});
-        }else{
-            res.status(404).json({Message:"Cannot find the record in the table"});
-        }
-    }catch(err){
-        console.error(err);
-        res.status(500).json({error:"Internal server error"});
-    };
-};
 
 const deleteTeacher=async(req,res)=>{
     const {id} = req.params;
@@ -74,25 +48,19 @@ const deleteTeacher=async(req,res)=>{
     };
 };
 
-const getTeacherByEmail= async(req)=>{
-    const {email}=req.body;
-    try{
-        const result = await Teacher.findOne({where:{email}});
-        if(result){
-            return result;
-        }else{
-            return {};
-        }
-    }catch(error){
-        console.error(error);
-    }
-}
+
+const renderTeacherDashboard= async(req,res)=>{
+    const subject = Subjects.findAll();
+    res.render('teacherDashboard',{
+        firstName:req.user.firstName,
+        lastName:req.user.lastName,
+        subjects:subject,
+    });
+};
 
 module.exports={
     createTeacher,
     updateTeacher,
-    getAllTeachers,
-    getTeacherByID,
     deleteTeacher,
-    getTeacherByEmail,
+    renderTeacherDashboard,
 };

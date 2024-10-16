@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Teacher Dashboard
+    link(rel='stylesheet', href='/stylesheets/stylesheet.css')  
+  body
+    nav
+      ul
+        li Welcome #{firstName} #{lastName}  
+        li
+          a(href="/teacher/details") Personal Details
+        li
+          a(href="/subjects") Modify Subjects
+        li
+          a(href="/auth/logout") Logout
+      
+    h1 Teacher Dashboard
+    section#subject-management
+      h2 Manage Subjects
+      form(action="/subject" method="POST")
+        label(for="subjectName") Add New Subject:
+        input(type="text" name="subjectName" placeholder="Enter subject name" required)
+        button(type="submit") Add Subject
+      if subjects && subjects.length
+        h3 Current Subjects:
+        ul
+          each subject in subjects
+            li
+              | #{subject.subjectName}
+              form(action=`/subjects/${subject.subjectID}?_method=DELETE` method="POST" style="display: inline-block")
+                button(type="submit") Delete
+      else
+        p No subjects available.
+
+    footer
+      p Thanks for visiting!

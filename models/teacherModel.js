@@ -38,6 +38,15 @@ const Teacher=sequelize.define('Teacher',{
     },
 });
 
-
+Teacher.associate = (models) => {
+    Teacher.hasMany(models.Subject, {
+        foreignKey: 'teacherId',
+    });
+    Teacher.belongsToMany(models.Student, {
+        through: 'TeacherSubjects',
+        foreignKey: 'teacherId',
+        otherKey: 'studentId',
+    });
+};
 
 module.exports=Teacher;
