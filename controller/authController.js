@@ -4,7 +4,6 @@ const studentController = require("../controller/studentController");
 const teacherController = require("../controller/teacherController");
 const studentService = require('../service/studentService');
 const teacherService=require('../service/teacherService');
-
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const register = async (req, res) => {
@@ -24,7 +23,7 @@ const register = async (req, res) => {
         console.log('inside deault');
         res.status(404).json({error:"Please enter correct user type"});
     }
-    if(user.userType==='student'){
+    if(user.userType === 'student'){
       res.redirect('/student/studentDashboard');
     }
     else if(user.userType === 'teacher'){
@@ -41,7 +40,6 @@ const login = async (req, res) => {
 
   try {
     switch (userType) {
-      //loggin in for student
       case "student":
         const student = await studentService.getStudentByEmail(req);
         if (student) {

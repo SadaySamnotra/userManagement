@@ -1,5 +1,5 @@
 const Student = require('../models/studentModel');
-const studentService = require('../service/studentService');
+
 
 const createStudent=async(req)=>{
     const {firstName,lastName,email,age,password,userType}=req.body;
